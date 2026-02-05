@@ -83,7 +83,7 @@ export function DashboardTable({ apps, isLoading }: DashboardTableProps) {
       </div>
 
       {/* Desktop Table View */}
-      <div className="bg-card hidden overflow-hidden overflow-x-auto rounded-md border md:block">
+      <div className="bg-card hidden overflow-hidden overflow-x-auto rounded-md border lg:block">
         <div className="inline-block min-w-full align-middle">
           <Table>
             <TableHeader className="bg-muted">
