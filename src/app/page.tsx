@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { Footer } from '@/components/Footer';
 import { DashboardTable } from '@/components/DashboardTable';
 import { UpdateControl } from '@/components/UpdateControl';
 import { DashboardData } from '@/lib/types';
@@ -53,50 +54,56 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container mx-auto max-w-5xl px-4 py-6">
-      <header className="mb-6 border-b pb-6">
-        <div className="mb-4 flex items-center justify-between">
-          <h1 className="text-xl font-semibold tracking-tight">Kids&Us Apps Versions</h1>
-          <ThemeToggle />
-        </div>
-
-        <UpdateControl
-          lastUpdate={data?.lastUpdate ?? null}
-          onUpdate={handleUpdate}
-          isUpdating={isUpdating}
-          isLoading={isLoading}
-        />
-
-        {error && (
-          <p className="text-destructive animate-in fade-in mt-2 text-xs duration-300">
-            Error: {error}
-          </p>
-        )}
-      </header>
-
-      <main>
-        {!isLoading && !data ? (
-          <div className="bg-card overflow-hidden rounded-md border">
-            <table className="w-full border-collapse">
-              <tbody>
-                <tr>
-                  <td className="text-muted-foreground px-4 py-12 text-center text-[0.8125rem]">
-                    <div>
-                      Please click{' '}
-                      <span onClick={handleUpdate} className="cursor-pointer underline">
-                        here
-                      </span>{' '}
-                      to generate the data.
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+    <div className="flex min-h-screen flex-col">
+      <div className="container mx-auto max-w-5xl flex-1 px-4 py-6">
+        <header className="mb-6 border-b pb-6">
+          <div className="mb-4 flex items-center justify-between">
+            <h1 className="text-xl font-semibold tracking-tight">Kids&Us Apps Versions</h1>
+            <ThemeToggle />
           </div>
-        ) : (
-          <DashboardTable apps={data?.apps || []} isLoading={isLoading || (isUpdating && !data)} />
-        )}
-      </main>
+
+          <UpdateControl
+            lastUpdate={data?.lastUpdate ?? null}
+            onUpdate={handleUpdate}
+            isUpdating={isUpdating}
+            isLoading={isLoading}
+          />
+
+          {error && (
+            <p className="text-destructive animate-in fade-in mt-2 text-xs duration-300">
+              Error: {error}
+            </p>
+          )}
+        </header>
+
+        <main>
+          {!isLoading && !data ? (
+            <div className="bg-card overflow-hidden rounded-md border">
+              <table className="w-full border-collapse">
+                <tbody>
+                  <tr>
+                    <td className="text-muted-foreground px-4 py-12 text-center text-[0.8125rem]">
+                      <div>
+                        Please click{' '}
+                        <span onClick={handleUpdate} className="cursor-pointer underline">
+                          here
+                        </span>{' '}
+                        to generate the data.
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <DashboardTable
+              apps={data?.apps || []}
+              isLoading={isLoading || (isUpdating && !data)}
+            />
+          )}
+        </main>
+      </div>
+      <Footer />
     </div>
   );
 }
