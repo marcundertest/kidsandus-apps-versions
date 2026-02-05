@@ -210,7 +210,7 @@ The development setup is straightforward as described in the [Quick Start](#-qui
 
 ## 📄 License
 
-This project has an **Unspecified** license. Please contact the repository owner for licensing information.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
