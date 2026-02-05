@@ -15,6 +15,12 @@ interface UpdateControlProps {
 export function UpdateControl({ lastUpdate, onUpdate, isUpdating, isLoading }: UpdateControlProps) {
   const [cooldownRemaining, setCooldownRemaining] = useState<number>(0);
   const [progress, setProgress] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -72,6 +78,7 @@ export function UpdateControl({ lastUpdate, onUpdate, isUpdating, isLoading }: U
   };
 
   const getLastUpdateText = () => {
+    if (!mounted) return 'Loading...';
     if (isLoading && !lastUpdate) return 'Retrieving data...';
     return `Last update: ${lastUpdate ? formatLastUpdate(lastUpdate) : 'Never'}`;
   };
@@ -89,7 +96,7 @@ export function UpdateControl({ lastUpdate, onUpdate, isUpdating, isLoading }: U
         </Button>
         <span className="text-muted-foreground text-[13px] whitespace-nowrap">
           {getLastUpdateText()}
-          {!isLoading && cooldownRemaining > 0 && ` (${cooldownRemaining}m left)`}
+          {mounted && !isLoading && cooldownRemaining > 0 && ` (${cooldownRemaining}m left)`}
         </span>
       </div>
 
