@@ -24,64 +24,62 @@ export function DashboardTable({ apps, isLoading }: DashboardTableProps) {
 
   return (
     <div className="space-y-4">
-      {/* Mobile Card View */}
-      <div className="block md:hidden">
-        <div className="grid grid-cols-1 gap-4">
-          {apps.map((app) => (
-            <Card key={app.id} className="overflow-hidden shadow-sm">
-              <CardHeader className="bg-muted/30 flex-row items-center gap-3 space-y-0 px-4 py-3">
-                {app.icon ? (
-                  <Image
-                    src={app.icon}
-                    alt={app.name}
-                    width={32}
-                    height={32}
-                    className="h-8 w-8 rounded-md border object-cover"
-                    unoptimized
-                    onError={(e) => (e.currentTarget.style.display = 'none')}
-                  />
-                ) : (
-                  <div className="bg-muted text-muted-foreground flex h-8 w-8 items-center justify-center rounded-md border text-xs font-bold">
-                    {app.name.charAt(0)}
-                  </div>
-                )}
-                <CardTitle className="text-base leading-none font-bold tracking-tight">
-                  {app.name}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="divide-y p-0">
-                {app.stores.map((store) => (
-                  <div key={store.id} className="flex flex-col gap-2 p-4">
-                    <div className="flex items-center justify-between">
-                      <a
-                        href={store.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[13px] font-medium hover:underline"
+      {/* Mobile Card View (shown below lg breakpoint) */}
+      <div className="space-y-4 lg:hidden">
+        {apps.map((app) => (
+          <Card key={app.id} className="border-muted overflow-hidden shadow-sm">
+            <CardHeader className="bg-muted/30 flex-row items-center gap-3 space-y-0 px-4 py-3">
+              {app.icon ? (
+                <Image
+                  src={app.icon}
+                  alt={app.name}
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 rounded-md border object-cover"
+                  unoptimized
+                  onError={(e) => (e.currentTarget.style.display = 'none')}
+                />
+              ) : (
+                <div className="bg-muted text-muted-foreground flex h-8 w-8 items-center justify-center rounded-md border text-xs font-bold">
+                  {app.name.charAt(0)}
+                </div>
+              )}
+              <CardTitle className="text-sm leading-none font-bold tracking-tight">
+                {app.name}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="divide-y p-0">
+              {app.stores.map((store) => (
+                <div key={store.id} className="flex flex-col gap-2 p-4">
+                  <div className="flex items-center justify-between gap-4">
+                    <a
+                      href={store.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary truncate text-[13px] font-medium hover:underline"
+                    >
+                      {store.name}
+                    </a>
+                    {store.version !== 'N/A' ? (
+                      <Badge
+                        variant="secondary"
+                        className="shrink-0 rounded-full px-2 py-0.5 font-mono text-[10px]"
                       >
-                        {store.name}
-                      </a>
-                      {store.version !== 'N/A' ? (
-                        <Badge
-                          variant="secondary"
-                          className="rounded-[calc(var(--radius)-2px)] px-2 py-0.5 font-mono text-[0.625rem]"
-                        >
-                          {store.version}
-                        </Badge>
-                      ) : (
-                        <span className="text-muted-foreground text-[0.625rem] italic">N/A</span>
-                      )}
-                    </div>
-                    <div className="text-muted-foreground flex items-center justify-between text-[11px]">
-                      <span>Last update:</span>
-                      <span className="font-medium">{store.lastUpdateDate}</span>
-                    </div>
+                        {store.version}
+                      </Badge>
+                    ) : (
+                      <span className="text-muted-foreground shrink-0 text-[10px] italic">N/A</span>
+                    )}
                   </div>
-                ))}
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                  <div className="text-muted-foreground flex items-center justify-between text-[11px]">
+                    <span>Actualización:</span>
+                    <span className="font-medium">{store.lastUpdateDate}</span>
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        ))}
       </div>
 
       {/* Desktop Table View */}
