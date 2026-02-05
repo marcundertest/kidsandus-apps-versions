@@ -27,13 +27,8 @@ This repository hosts a modern web application built with Next.js and React, des
 
 ## 🖥️ Screenshots
 
-<!-- TODO: Add actual screenshots of the application, showing different views like the main list, detailed view, and mobile responsiveness. -->
-<!--
-
-![Screenshot 1 - Desktop View](path-to-screenshot-desktop.png)
-
-![Screenshot 2 - Mobile View](path-to-screenshot-mobile.png)
--->
+![Desktop Screenshot](public/assets/screenshot-desktop.png)
+![Mobile Screenshot](public/assets/screenshot-mobile.png)
 
 ## 🛠️ Tech Stack
 
