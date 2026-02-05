@@ -9,9 +9,10 @@ interface UpdateControlProps {
   lastUpdate: string | null;
   onUpdate: () => Promise<void>;
   isUpdating: boolean;
+  isLoading: boolean;
 }
 
-export function UpdateControl({ lastUpdate, onUpdate, isUpdating }: UpdateControlProps) {
+export function UpdateControl({ lastUpdate, onUpdate, isUpdating, isLoading }: UpdateControlProps) {
   const [cooldownRemaining, setCooldownRemaining] = useState<number>(0);
   const [progress, setProgress] = useState(0);
 
@@ -70,20 +71,25 @@ export function UpdateControl({ lastUpdate, onUpdate, isUpdating }: UpdateContro
     }
   };
 
+  const getLastUpdateText = () => {
+    if (isLoading && !lastUpdate) return 'Retrieving data...';
+    return `Last update: ${lastUpdate ? formatLastUpdate(lastUpdate) : 'Never'}`;
+  };
+
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-3">
         <Button
           onClick={onUpdate}
-          disabled={isUpdating || cooldownRemaining > 0}
+          disabled={isUpdating || isLoading || cooldownRemaining > 0}
           size="sm"
           className="h-8 w-fit shrink-0 px-4"
         >
           {isUpdating ? 'Updating...' : 'Update Data'}
         </Button>
         <span className="text-muted-foreground text-[13px] whitespace-nowrap">
-          Last update: {lastUpdate ? formatLastUpdate(lastUpdate) : 'Never'}
-          {cooldownRemaining > 0 && ` (${cooldownRemaining}m left)`}
+          {getLastUpdateText()}
+          {!isLoading && cooldownRemaining > 0 && ` (${cooldownRemaining}m left)`}
         </span>
       </div>
 

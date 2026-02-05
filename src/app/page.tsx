@@ -64,6 +64,7 @@ export default function Home() {
           lastUpdate={data?.lastUpdate ?? null}
           onUpdate={handleUpdate}
           isUpdating={isUpdating}
+          isLoading={isLoading}
         />
 
         {error && (
