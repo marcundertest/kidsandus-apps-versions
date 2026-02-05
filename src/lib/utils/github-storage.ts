@@ -1,3 +1,4 @@
+import 'server-only';
 import { Octokit } from 'octokit';
 
 interface GithubConfig {
