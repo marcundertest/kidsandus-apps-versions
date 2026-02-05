@@ -1,12 +1,12 @@
-import { format, parseISO } from "date-fns";
+import { format } from 'date-fns';
 
 export function formatDate(dateString: string): string {
   try {
     const date = new Date(dateString);
-    if (isNaN(date.getTime())) return "N/A";
-    return format(date, "dd/MM/yyyy");
+    if (isNaN(date.getTime())) return 'N/A';
+    return format(date, 'dd/MM/yyyy');
   } catch {
-    return "N/A";
+    return 'N/A';
   }
 }
 
