@@ -19,6 +19,7 @@ This repository hosts a modern web application built with Next.js and React, des
 ## ✨ Features
 
 - **Centralized App Version Display:** Effortlessly view and manage all Kids&Us application versions data sourced from a simple `data.json` file.
+- **Smart Data Update:** Manual data refresh capability with built-in cooldowns and clear loading feedback to prevent API spam.
 - **Internationalization (i18n):** Supports multiple languages for content, ensuring accessibility and relevance for diverse users.
 - **Theme Switching:** Seamlessly switch between light and dark modes for a personalized viewing experience.
 - **Responsive Design:** Optimized for various screen sizes and devices, providing a consistent and intuitive interface across desktops, tablets, and mobile phones.
@@ -99,6 +100,7 @@ kidsandus-apps-versions/
 ├── components.json
 ├── data.json
 ├── eslint.config.mjs
+├── netlify.toml
 ├── next.config.ts
 ├── package-lock.json
 ├── package.json
