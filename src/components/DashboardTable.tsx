@@ -57,6 +57,7 @@ export function DashboardTable({ apps, isLoading }: DashboardTableProps) {
                       href={store.url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`${store.name} for ${app.name}`}
                       className="text-primary truncate text-[15px] font-medium hover:underline md:text-[13px]"
                     >
                       {store.name}
@@ -137,6 +138,7 @@ export function DashboardTable({ apps, isLoading }: DashboardTableProps) {
                         href={store.url}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={`${store.name} for ${app.name}`}
                         className="text-foreground transition-colors hover:underline"
                       >
                         {store.name}
