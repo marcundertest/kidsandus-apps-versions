@@ -1,22 +1,13 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs/promises';
+import { readData, writeData } from '@/lib/utils/fs';
 import { ScraperService } from '@/lib/scrapers/service';
 import { APPS_CONFIG } from '@/lib/config';
-import { getDataPath } from '@/lib/utils/fs';
 
 const COOLDOWN_MINUTES = 60;
 
 export async function POST() {
-  const dataPath = getDataPath();
-
   try {
-    let currentData;
-    try {
-      const content = await fs.readFile(dataPath, 'utf8');
-      currentData = JSON.parse(content);
-    } catch {
-      // Ignore read errors
-    }
+    const currentData = await readData<{ lastUpdate?: string }>(); // Replace explicit try-catch read
 
     if (currentData?.lastUpdate) {
       const lastUpdate = new Date(currentData.lastUpdate);
@@ -37,21 +28,23 @@ export async function POST() {
     const newData = await scraperService.scrapeAll(APPS_CONFIG);
 
     try {
-      await fs.writeFile(dataPath, JSON.stringify(newData, null, 2));
+      await writeData(newData);
     } catch (writeError) {
       console.error('Persistence failed:', writeError);
+      // We still return success as the scrape worked, just persistence failed
     }
 
     return NextResponse.json({
       success: true,
       data: newData,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Update failed:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
       {
         success: false,
-        error: error.message,
+        error: errorMessage,
       },
       { status: 500 }
     );
