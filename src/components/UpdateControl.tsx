@@ -36,9 +36,12 @@ export function UpdateControl({ lastUpdate, onUpdate, isUpdating }: UpdateContro
         clearInterval(interval);
       };
     } else if (progress > 0) {
-      setProgress(100);
+      const completeTimeout = setTimeout(() => setProgress(100), 0);
       const timer = setTimeout(() => setProgress(0), 1000);
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(completeTimeout);
+        clearTimeout(timer);
+      };
     }
   }, [isUpdating, progress]);
 
