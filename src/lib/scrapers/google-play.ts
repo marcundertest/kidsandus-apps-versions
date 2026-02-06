@@ -22,7 +22,7 @@ export class GooglePlayScraper implements IScraper {
 
     const versionPatterns = [
       /\[\[\["([\d.]+)"\]\],\[\[\[\d+\]\],\[\[\[\d+,"[\d.]+"\]\]\]\]\]/i,
-      /About this (app|game)[\s\S]{1,5000}?Version[\s\S]{1,300}?([\d.]+)/i,
+      /About this (?:app|game)[\s\S]{1,5000}?Version[\s\S]{1,300}?([\d.]+)/i,
       /Version[\s<>"]+([0-9.]+)/i,
       /"softwareVersion"\s*:\s*"([^"]+)"/i,
     ];
