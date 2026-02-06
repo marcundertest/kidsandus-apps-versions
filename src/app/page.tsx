@@ -25,7 +25,6 @@ export default function Home() {
       setData(json);
     } catch (err) {
       console.error(err);
-      // Silent error on initial load unless critical
     } finally {
       setIsLoading(false);
     }
@@ -35,14 +34,12 @@ export default function Home() {
     const isAdminAttempt = typeof adminKey !== 'undefined';
     let progressTimer: NodeJS.Timeout | undefined;
 
-    // Normal User: Instant feedback
     if (!isAdminAttempt) {
       setIsUpdating(true);
     } else {
-      // Admin User: Delayed feedback to avoid flicker on 401
       progressTimer = setTimeout(() => {
         setIsUpdating(true);
-      }, 500);
+      }, 2000);
     }
 
     const toastId = toast.loading(
@@ -70,7 +67,6 @@ export default function Home() {
       const message = err instanceof Error ? err.message : 'Update failed';
       toast.error(message, { id: toastId });
     } finally {
-      // Cleanup: Clear timer if it hasn't fired yet (short request)
       if (progressTimer) clearTimeout(progressTimer);
       setIsUpdating(false);
     }
