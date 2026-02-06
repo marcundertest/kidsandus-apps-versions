@@ -157,7 +157,7 @@ kidsandus-app-versions/
 ### Available Scripts
 
 | Command         | Description                                        |
-|-----------------|----------------------------------------------------|
+| --------------- | -------------------------------------------------- |
 | `npm run dev`   | Starts the development server                      |
 | `npm run build` | Compiles the application for production deployment |
 | `npm run start` | Starts the production server                       |
@@ -204,8 +204,8 @@ The application provides a basic API endpoint to access its data.
 
   ```javascript
   fetch('/api')
-    .then(response => response.json())
-    .then(data => console.log(data));
+    .then((response) => response.json())
+    .then((data) => console.log(data));
   ```
 
 ## 🤝 Contributing

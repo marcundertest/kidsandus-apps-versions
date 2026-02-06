@@ -7,7 +7,7 @@ export interface ScrapeResult {
 
 export interface StoreConfig {
   id: string;
-  type: "google-play" | "itunes" | "microsoft" | "huawei";
+  type: 'google-play' | 'itunes' | 'microsoft' | 'huawei';
   packageId?: string;
   appId?: string;
   productId?: string;
