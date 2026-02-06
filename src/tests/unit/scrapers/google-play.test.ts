@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach, Mock } from 'vitest';
-import { GooglePlayScraper } from './google-play';
-import { StoreConfig } from './types';
+import { GooglePlayScraper } from '@/lib/scrapers/google-play';
+import { StoreConfig } from '@/lib/scrapers/types';
 
 describe('GooglePlayScraper', () => {
   let scraper: GooglePlayScraper;

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach, Mock } from 'vitest';
-import { AppStoreScraper } from './app-store';
-import { StoreConfig } from './types';
+import { AppStoreScraper } from '@/lib/scrapers/app-store';
+import { StoreConfig } from '@/lib/scrapers/types';
 
 describe('AppStoreScraper', () => {
   let scraper: AppStoreScraper;

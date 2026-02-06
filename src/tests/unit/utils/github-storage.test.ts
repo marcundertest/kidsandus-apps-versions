@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { GithubStorage } from './github-storage';
+import { GithubStorage } from '@/lib/utils/github-storage';
 
 // Mock Octokit class
 const mockGetContent = vi.fn();

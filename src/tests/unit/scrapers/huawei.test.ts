@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach, Mock } from 'vitest';
-import { HuaweiScraper } from './huawei';
-import { StoreConfig } from './types';
+import { HuaweiScraper } from '@/lib/scrapers/huawei';
+import { StoreConfig } from '@/lib/scrapers/types';
 
 describe('HuaweiScraper', () => {
   let scraper: HuaweiScraper;
