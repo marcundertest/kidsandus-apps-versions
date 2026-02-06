@@ -133,7 +133,7 @@ export function UpdateControl({ lastUpdate, onUpdate, isUpdating, isLoading }: U
             title="Last update time"
           >
             {getLastUpdateText()}
-            {mounted && !isLoading && cooldownRemaining > 0 && ` (${cooldownRemaining}m left)`}
+            {mounted && !isLoading && cooldownRemaining > 0 && ` (${cooldownRemaining}m remaining)`}
           </span>
         </div>
 
