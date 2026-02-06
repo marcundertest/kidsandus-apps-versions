@@ -61,7 +61,7 @@ export class GithubStorage {
 
   async saveData(
     content: unknown,
-    message: string = 'chore(data): update data.json',
+    message: string = 'chore: update data.json',
     retries: number = 3
   ): Promise<void> {
     let currentRetry = 0;
