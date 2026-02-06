@@ -1,4 +1,5 @@
 import { IScraper, ScrapeResult, StoreConfig } from './types';
+import { HuaweiResponseSchema } from '../schemas';
 
 export class HuaweiScraper implements IScraper {
   async scrape(config: StoreConfig): Promise<ScrapeResult> {
@@ -45,7 +46,15 @@ export class HuaweiScraper implements IScraper {
 
     if (!response.ok) throw new Error(`HTTP ${response.status} fetching details`);
 
-    const data = await response.json();
+    const json = await response.json();
+    const parsed = HuaweiResponseSchema.safeParse(json);
+
+    if (!parsed.success) {
+      console.error('Huawei API schema validation failed:', parsed.error);
+      throw new Error('Invalid Huawei API response structure');
+    }
+
+    const data = parsed.data;
 
     let version = 'N/A';
     let lastUpdateDate = 'N/A';
@@ -56,10 +65,10 @@ export class HuaweiScraper implements IScraper {
         if (layout.dataList && layout.dataList.length > 0) {
           const item = layout.dataList[0];
           if (item.versionName || item.version) {
-            version = item.versionName || item.version;
+            version = item.versionName || item.version || 'N/A';
           }
           if (item.releaseDate || item.updateTime) {
-            lastUpdateDate = item.releaseDate || item.updateTime;
+            lastUpdateDate = item.releaseDate || item.updateTime || 'N/A';
           }
           if (item.icon && !icon) {
             icon = item.icon;
